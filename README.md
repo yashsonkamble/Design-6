@@ -1,47 +1,54 @@
 # Design-6
 
-## Problem1 Design Logger Rate Limiter (https://leetcode.com/subscribe/?next=/explore/interview/card/yelp/43/design/2959/)
+## Problem1 Design Phone Directory (https://leetcode.com/problems/design-phone-directory/)
+Design a Phone Directory which supports the following operations:
 
-Design a logger system that receive stream of messages along with its timestamps, each message should be printed if and only if it is not printed in the last 10 seconds.
+get: Provide a number which is not assigned to anyone.
 
-Given a message and a timestamp (in seconds granularity), return true if the message should be printed in the given timestamp, otherwise returns false.
+check: Check if a number is available or not.
 
-It is possible that several messages arrive roughly at the same time.
+release: Recycle or release a number.
 
 Example:
 
-Logger logger = new Logger();
+// Init a phone directory containing a total of 3 numbers: 0, 1, and 2.
+
+PhoneDirectory directory = new PhoneDirectory(3);
 
 
-// logging string "foo" at timestamp 1
+// It can return any available phone number. Here we assume it returns 0.
 
-logger.shouldPrintMessage(1, "foo"); returns true; 
-
-
-// logging string "bar" at timestamp 2
-
-logger.shouldPrintMessage(2,"bar"); returns true;
+directory.get();
 
 
-// logging string "foo" at timestamp 3
+// Assume it returns 1.
 
-logger.shouldPrintMessage(3,"foo"); returns false;
-
-
-// logging string "bar" at timestamp 8
-
-logger.shouldPrintMessage(8,"bar"); returns false;
+directory.get();
 
 
-// logging string "foo" at timestamp 10
+// The number 2 is available, so return true.
 
-logger.shouldPrintMessage(10,"foo"); returns false;
+directory.check(2);
 
 
-// logging string "foo" at timestamp 11
+// It returns 2, the only number that is left.
 
-logger.shouldPrintMessage(11,"foo"); returns true;
+directory.get();
 
+
+// The number 2 is no longer available, so return false.
+
+directory.check(2);
+
+
+// Release number 2 back to the pool.
+
+directory.release(2);
+
+
+// Number 2 is available again, return true.
+
+directory.check(2);
 
 ## Problem2 Design Autocomplete System (https://leetcode.com/explore/interview/card/amazon/81/design/3000/)
 
